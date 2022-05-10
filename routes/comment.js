@@ -3,12 +3,15 @@ const router = express.Router();
 
 var RecipeModel = require('../model/recipe')
 
-// Add Comment
+/**
+ * API Endpoint to add comment
+ */
 router.post("/add_comment", async (req, res) => {
 
     try {
       const { _id, user_name, comment } = req.body;
 
+      // Add comment to existing recipe data
       await RecipeModel.findByIdAndUpdate({
         _id
       },
@@ -37,8 +40,10 @@ router.post("/add_comment", async (req, res) => {
     }
   })
 
-  // Upvote comment
-  router.put("/inc_upvote_comment", async (req, res) => {
+/**
+ * API Endpoint to increase upvote of comment
+ */
+router.put("/inc_upvote_comment", async (req, res) => {
 
     try {
       const { _id, comment_id, user_name } = req.body;
@@ -47,6 +52,8 @@ router.post("/add_comment", async (req, res) => {
         "_id" : _id,
         "comments.comment_id" : comment_id
       },
+
+      // Add the user name to upvotes and remove from downvotes if found
       {
         $push : {
           "comments.$.upvotes" : user_name
@@ -67,9 +74,12 @@ router.post("/add_comment", async (req, res) => {
         data: `Error in updating upvotes :: ${error.message}`,
       });
     }
-  })
+})
 
-  router.put("/dec_upvote_comment", async (req, res) => {
+/**
+ * API Endpoint to decrease upvote of comment
+ */
+router.put("/dec_upvote_comment", async (req, res) => {
 
     try {
       const { _id, comment_id, user_name } = req.body;
@@ -78,6 +88,8 @@ router.post("/add_comment", async (req, res) => {
         "_id" : _id,
         "comments.comment_id" : comment_id
       },
+
+      // Remove the user name from upvotes
       {
         $pull : {
           "comments.$.upvotes" : user_name
@@ -95,10 +107,12 @@ router.post("/add_comment", async (req, res) => {
         data: `Error in updating upvotes :: ${error.message}`,
       });
     }
-  })
+})
 
-  // Downvote comment
-  router.put("/inc_downvote_comment", async (req, res) => {
+/**
+ * API Endpoint to increase downvote of comment
+ */
+router.put("/inc_downvote_comment", async (req, res) => {
 
     try {
       const { _id, comment_id, user_name } = req.body;
@@ -107,6 +121,8 @@ router.post("/add_comment", async (req, res) => {
         "_id" : _id,
         "comments.comment_id" : comment_id
       },
+
+      // Add the user name to downvotes and remove from upvotes if found
       {
         $push : {
           "comments.$.downvotes" : user_name
@@ -127,9 +143,12 @@ router.post("/add_comment", async (req, res) => {
         data: `Error in updating downvotes :: ${error.message}`,
       });
     }
-  })
+})
 
-  router.put("/dec_downvote_comment", async (req, res) => {
+/**
+ * API Endpoint to decrease downvote of comments
+ */
+router.put("/dec_downvote_comment", async (req, res) => {
 
     try {
       const { _id, comment_id, user_name } = req.body;
@@ -138,6 +157,8 @@ router.post("/add_comment", async (req, res) => {
         "_id" : _id,
         "comments.comment_id" : comment_id
       },
+
+      // Remove the user name from downvotes
       {
         $pull : {
           "comments.$.downvotes" : user_name
@@ -155,6 +176,6 @@ router.post("/add_comment", async (req, res) => {
         data: `Error in updating downvotes :: ${error.message}`,
       });
     }
-  })
+})
 
 module.exports = router;

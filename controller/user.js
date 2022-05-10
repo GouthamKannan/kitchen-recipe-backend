@@ -5,17 +5,10 @@
 const mongodb = require("mongodb")
 const nodemailer = require('nodemailer')
 require("dotenv").config({ path: "../env" });
-// const { client: mongoClient } = require("../model/mongodb");
 
+// Get the mongoose models
 var UserModel = require('../model/user')
 var codeModel = require('../model/code')
-
-// // Connect to database
-// const dbConnection = mongoClient.db("todo_application");
-
-// // Get the collections from database
-// const userCollection = dbConnection.collection("user_details");
-// const codeCollection = dbConnection.collection("code_details");
 
 // Create a transport for sending mail
 var smtpTransport = nodemailer.createTransport({

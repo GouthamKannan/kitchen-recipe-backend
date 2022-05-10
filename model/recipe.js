@@ -1,4 +1,6 @@
-const { ObjectId } = require('mongodb');
+/**
+ * Mongoose model for recipe_details collection
+ */
 var mongoose=require('mongoose');
 
 var RecipeSchema = new mongoose.Schema({
@@ -16,7 +18,7 @@ var RecipeSchema = new mongoose.Schema({
     upvotes : [String],
     downvotes : [String],
     comments : [{
-        comment_id : ObjectId,
+        comment_id : String,
         user_name : String,
         timestamp : String,
         comment   : String,

@@ -4,6 +4,7 @@ require("dotenv").config({ path: ".env" });
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 
+// Connect to database
 const db = require("./mongodb/mongodb")
 
 const JWT_SIGNING_KEY = process.env.JWT_SIGNING_KEY;
