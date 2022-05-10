@@ -19,3 +19,8 @@ The frontend code can be found in the repository
 # DEMO
 
 The application is hosted in [https://kitchen-recipe.netlify.app/](https://kitchen-recipe.netlify.app/)
+
+# DEMO CREDENTIALS
+
+email - guest@guest.com <br>
+password - guest
